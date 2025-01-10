@@ -22,8 +22,4 @@ def send_to_kinesis(ticker):
 if __name__ == '__main__':
     while True:
         send_to_kinesis('TSLA')
-        send_to_kinesis('AAPL')
-        send_to_kinesis('GOOGL')
-        send_to_kinesis('AMZN')
-        send_to_kinesis('MSFT')
         time.sleep(10)
