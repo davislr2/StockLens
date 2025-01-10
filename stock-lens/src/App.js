@@ -1,24 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+//import StockStream from './components/StockStream.js'
+import TradingViewWidget from './components/TradingViewWidget.jsx'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div id='container'>
+          <h1>Real-Time Stock Tracker</h1>
+          {/*<StockStream />*/}
+          <div id='trade-view-widget'>
+            <TradingViewWidget />
+          </div>
+        </div>
+      </div>
   );
 }
 
