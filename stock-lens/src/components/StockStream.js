@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-const API_URL = 'https://q31bo4hq5e.execute-api.us-east-1.amazonaws.com/default/';
 
 const StockStream = () => {
     const [stocks, setStocks] = useState({});
 
     useEffect(() => {
+        const API_URL = 'https://q31bo4hq5e.execute-api.us-east-1.amazonaws.com/default/';
+
         const fetchStockData = async () => {
             try {
                 const response = await fetch(API_URL, {
                     method: 'GET',
                     mode: 'cors',
-                    credentials: 'omit', // or 'include' if your API requires credentials
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -20,13 +20,7 @@ const StockStream = () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-        
-                const updatedStocks = {};
-                data.forEach(stock => {
-                    updatedStocks[stock.ticker] = stock;
-                });
-        
-                setStocks(updatedStocks);
+                // ... rest of your code
             } catch (error) {
                 console.error("Error fetching stock data:", error);
             }
