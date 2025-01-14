@@ -17,7 +17,7 @@ def send_to_kinesis(ticker):
     record = {'ticker': ticker, 'price': price, 'timestamp': time.time()}
     kinesis.put_record(StreamName='stock-price-stream', Data=json.dumps(record), PartitionKey=ticker)
 
-    print(f"Sent {ticker} price to Kinesis: {price}")
+    
 
 if __name__ == '__main__':
     while True:
