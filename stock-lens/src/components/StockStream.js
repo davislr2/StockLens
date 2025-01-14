@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const API_URL = 'arn:aws:apigateway:us-east-1::/apis/q31bo4hq5e/routes/bk2xuon';
+const API_URL = 'https://q31bo4hq5e.execute-api.us-east-1.amazonaws.com';
 
 const StockStream = () => {
     const [stocks, setStocks] = useState({});
