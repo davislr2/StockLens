@@ -5,7 +5,7 @@ const StockStream = () => {
     const [stocks, setStocks] = useState({});
 
     useEffect(() => {
-        const API_URL = 'https://q31bo4hq5e.execute-api.us-east-1.amazonaws.com/default/';
+        const API_URL = 'https://q31bo4hq5e.execute-api.us-east-1.amazonaws.com/default';
 
         const fetchStockData = async () => {
             try {
