@@ -1,36 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
-import '../styles/StockStream.css';
 
-const socket = io('http://localhost:5000');
+const API_URL = 'arn:aws:apigateway:us-east-1::/apis/q31bo4hq5e/routes/bk2xuon';
 
 const StockStream = () => {
-    const [stocks, setStocks] = useState({}); // Use an object instead of an array
+    const [stocks, setStocks] = useState({});
 
     useEffect(() => {
-        socket.on("stock_update", (data) => {
-            setStocks((prevStocks) => ({
-                ...prevStocks, 
-                [data.ticker]: data  // ✅ Update stock price by ticker
-            }));
-        });
+        const fetchStockData = async () => {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
 
-        return () => {
-            socket.off("stock_update");
+                const updatedStocks = {};
+                data.forEach(stock => {
+                    updatedStocks[stock.ticker] = stock;
+                });
+
+                setStocks(updatedStocks);
+            } catch (error) {
+                console.error("Error fetching stock data:", error);
+            }
         };
+
+        // Fetch stock data every 3 seconds
+        const interval = setInterval(fetchStockData, 3000);
+
+        return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
     return (
-       <div id="stock-prices-container">
+        <div id="stock-prices-container">
             <h2 id="stock-prices-header">Live Stock Prices</h2>
             <ul id="stock-prices-list">
-                {Object.values(stocks).map((stock) => (
+                {Object.values(stocks).map(stock => (
                     <li key={stock.ticker} className="stock-price-list-item">
                         <strong>{stock.ticker}</strong>: ${stock.price.toFixed(2)} at {new Date(stock.timestamp * 1000).toLocaleTimeString()}
                     </li>
                 ))}
-            </ul>    
-       </div> 
+            </ul>
+        </div>
     );
 };
 
