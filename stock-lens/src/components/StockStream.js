@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/StockStream.css';
 
-const API_URL = "https://ekaedtgx37.execute-api.us-east-1.amazonaws.com/prod"; 
+const API_URL = "https://ekaedtgx37.execute-api.us-east-1.amazonaws.com/prod/stocks"; 
 
 const StockStream = () => {
     const [stocks, setStocks] = useState({});
