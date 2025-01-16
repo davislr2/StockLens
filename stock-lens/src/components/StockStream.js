@@ -11,12 +11,18 @@ const StockStream = () => {
         const fetchStocks = async () => {
             try {
                 const response = await axios.get(API_URL);
-                console.log("Stock data:", response.data);
-                const stockData = response.data.reduce((acc, stock) => {
-                    acc[stock.ticker] = stock;
-                    return acc;
-                }, {});
-                setStocks(stockData);
+                console.log("Stock data:", response.data); // Log the structure of response.data
+
+                // Check if response.data is an array
+                if (Array.isArray(response.data)) {
+                    const stockData = response.data.reduce((acc, stock) => {
+                        acc[stock.ticker] = stock;
+                        return acc;
+                    }, {});
+                    setStocks(stockData);
+                } else {
+                    console.error("Expected an array but got:", response.data);
+                }
             } catch (error) {
                 console.error("Error fetching stock data:", error);
             }
