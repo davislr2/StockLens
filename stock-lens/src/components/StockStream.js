@@ -11,25 +11,26 @@ const StockStream = () => {
             try {
                 const response = await fetch(API_URL, {
                     method: 'GET',
-                    mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
+                        // Include any necessary authentication headers here
+                        // 'x-api-key': 'your-api-key',  // If using API Key
+                        // 'Authorization': 'Bearer your-token',  // If using bearer token
                     },
                 });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                // ... rest of your code
+                setStocks(data);
             } catch (error) {
                 console.error("Error fetching stock data:", error);
             }
         };
 
-        // Fetch stock data every 3 seconds
+        fetchStockData();
         const interval = setInterval(fetchStockData, 3000);
-
-        return () => clearInterval(interval); // Cleanup on unmount
+        return () => clearInterval(interval);
     }, []);
 
     return (
