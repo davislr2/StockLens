@@ -11,6 +11,7 @@ const StockStream = () => {
         const fetchStocks = async () => {
             try {
                 const response = await axios.get(API_URL);
+                console.log("Stock data:", response.data);
                 const stockData = response.data.reduce((acc, stock) => {
                     acc[stock.ticker] = stock;
                     return acc;
